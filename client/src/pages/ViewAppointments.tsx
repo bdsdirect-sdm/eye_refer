@@ -4,6 +4,9 @@ import api from '../api/axiosInstance';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { MdOutlineEdit } from "react-icons/md";
+// import { AiOutlineDelete } from "react-icons/ai";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const ViewAppointments: React.FC = () => {
   const navigate = useNavigate();
@@ -15,9 +18,9 @@ const ViewAppointments: React.FC = () => {
     }
   },[])
 
-  async function updateStatus(){
+  async function updateStatus(appointmentStatus: string, patientId: number, appointmentId: number){
     try {
-      const response = await api.post(`${Local.UPDATE_APPOINTMENT_STATUS}`, {status },
+      const response = await api.post(`${Local.UPDATE_APPOINTMENT_STATUS}`, {appointmentStatus, patientId, appointmentId},
         {
         headers: {
           Authorization: `Bearer ${token}`
@@ -95,12 +98,19 @@ const ViewAppointments: React.FC = () => {
         <td> {appointment.status}</td>
         
         <td>
-          <button className='text-green-700' onClick={updateStatus}> Complete </button>
+        <button className='text-green-700' onClick={() => {
+            updateStatus("Completed", appointment.patient.uuid, appointment.id)
+          }}> Complete </button>
         </td>
         <td>
-          <button className='text-red-700' onClick={updateStatus}> Cancel </button>
+        <button className='text-red-700' onClick={() => updateStatus("Canceled", appointment.patient.uuid, appointment.id)}> Cancel </button>
         </td>
-        <td></td>
+        <td className="border px-4 py-2">
+                <div className='flex flex-row'>
+                <button className="btn btn-primary mr-2" onClick={() => { navigate(`/edit-appointment/${appointment.id}`); }}><MdOutlineEdit /></button>
+                <button className="btn btn-secondary" onClick={() => { navigate(`/view-appointment/${appointment.id}`); }}><MdOutlineRemoveRedEye /></button>
+                </div>
+              </td>
       </tr>
       </>
     ))}

@@ -60,6 +60,14 @@ Patient.init({
         type: DataTypes.STRING,
         allowNull: true
     },
+    email:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    phone:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     notes:{
         type: DataTypes.STRING,
         allowNull: false

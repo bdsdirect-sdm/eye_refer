@@ -16,6 +16,8 @@ interface config{
     VIEW_PATIENT: string;
     GET_CHATBAR: string;
     GET_CHATDATA: string;
+    VIEW_APPOINTMENT: string;
+    EDIT_APPOINTMENT: string;
 }
 
 export const Local:config = {
@@ -36,4 +38,6 @@ export const Local:config = {
     VIEW_PATIENT: import.meta.env.VITE_VIEW_PATIENT,
     GET_CHATBAR: import.meta.env.VITE_GET_CHATBAR,
     GET_CHATDATA: import.meta.env.VITE_GET_CHATDATA,
+    VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT,
+    EDIT_APPOINTMENT: import.meta.env.VITE_EDIT_APPOINTMENT
 }

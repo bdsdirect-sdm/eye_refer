@@ -20,6 +20,8 @@ import PatientListMD from './components/PatientListMD';
 import ViewAppointments from './pages/ViewAppointments';
 import ViewPatient from './pages/ViewPatient';
 import EditPatient from './pages/EditPatient';
+import ViewAppointment from './pages/ViewAppointment';
+import EditAppointment from './pages/EditAppointment';
 
 const  App:react.FC = () => {
 
@@ -107,6 +109,14 @@ const  App:react.FC = () => {
         {
           path: '/edit-patient/:id',
           element: <EditPatient />
+        },
+        {
+          path: '/view-appointment/:id',
+          element: <ViewAppointment />
+        },
+        {
+          path: '/edit-appointment/:id',
+          element: <EditAppointment />
         },
       ]
     }

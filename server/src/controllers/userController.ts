@@ -344,8 +344,12 @@ export const viewAppointments = async(req: any, res: any) => {
 //tbc
 export const updateAppointmentStatus = async (req: any, res: any) => {
     try {
-        const { status, uuid } = req.body;
-        const appointment = await Appointment.findOne()
+        const { appointmentStatus, patientId, appointmentId } = req.body;
+        const appointment = await Appointment.findOne({where: [{patient: patientId}, {uuid: appointmentId}]});
+        if(appointment) {
+            appointment.status = appointmentStatus
+        }
+        await appointment?.save();
     } catch (err) {
         res.status(500).json({message: "Internal server error", err});
     }
@@ -369,11 +373,21 @@ export const viewPatient = async (req: any, res: any) => {
     }
 }
 
+export const viewAppointment = async(req: any, res: any) => {
+    try {
+        const { id } = req.params;
+        console.log("ID:::::::::::", id)
+        const appointment = await Appointment.findOne({where: {uuid: id}, include: Patient} );
+        res.status(200).json({"appointmentData": appointment, "message": "Appointment data received"});
+    } catch (err) {
+        res.status(500).json({message: "Internal server error", err});
+    }
+}
+
 //tbc
 export const editPatient = async (req: any, res: any) => {
     try {
         const id = req.params.id;
-        const patient = await Patient.findOne({where: {uuid: id}, include: [{model: User}, {model: Address}, {model: Appointment}]});
 
         const {dob,
             phone,
@@ -386,21 +400,24 @@ export const editPatient = async (req: any, res: any) => {
             timing,
             referedto,
             address,
-            notes} = req.body;
+            note,uuid} = req.body;
         const  medicaldocs  = req.file.path;
-        const newPatient = await Patient.update({ dob,
-            phone,
-            firstname,
-            lastname,
-            gender,
-            disease,
-            laterality,
-            referback,
-            timing,
-            referedto,
-            address,
-            notes, medicaldocs }, {where: {uuid: id}});
-        res.status(200).json({"patientData":patient, "message": "Patient data received"});
+        const patient = await Patient.findOne({where: {uuid: id}, include: [{model: User}, {model: Address}, {model: Appointment}]});
+        if(patient) {
+            patient.dob = dob;
+            patient.phone = phone,
+            patient.firstname = firstname,
+            patient.lastname = lastname,
+            patient.gender = gender,
+            patient.disease = disease,
+            patient.laterality = laterality,
+            patient.referback = referback,
+            patient.timing = timing,
+            patient.referedto = referedto,
+            patient.address = address,
+            patient.note = note
+        }
+        await patient?.save();
     } catch (err) {
         res.status(500).json({message: "Internal server error", err})
     }
@@ -419,8 +436,10 @@ export const chatRooms = async(req: any, res: any) => {
 
 export const chatData = async (req: any, res: any) => {
     try {
-        const {roomId} = req.query;
+        const {roomId} = req.params;
+        console.log("dsdfsdfsdfsdf",roomId)
         const chatList = await Message.findAll({where:{room:roomId}});
+        console.log("chatList",chatList)
 
         if (!chatList) {
             return res.status(404).json({ message: "No chats found for this room" });
