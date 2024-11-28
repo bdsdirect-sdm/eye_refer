@@ -7,11 +7,15 @@ import Footer from '../components/Footer'
 const Layout = () => {
   return (
     <>
-    <div className='h-screen flex flex-col'>
+    <div className='h-screen'>
             <Header />
-            <div className="flex ">
-                <Navbar />
-                <div className="flex-grow p-2 bg-gray-300"><Outlet/></div>
+            <div className=" flex flex-row ">
+                <div>
+                  <Navbar />
+                </div>
+                <div  className="w-full overflow-x-auto">
+                  <Outlet />
+                </div>
                 
             </div>
             {/* <Footer/> */}

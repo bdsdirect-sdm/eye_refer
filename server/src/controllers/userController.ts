@@ -413,14 +413,14 @@ export const chatRooms = async(req: any, res: any) => {
         //check patient appointment is pending or not
         const patientsList = await Patient.findAll({where:{[Op.or]:[{referedby:uuid},{referedto:uuid}]}});
         console.log(patientsList);
-        res.status(200).json("ChatRoom", patientsList, {message: "patients found"});
+        res.status(200).json({success:true,message: "patients found",patientsList});
     } catch (err) {}
 }
 
 export const chatData = async (req: any, res: any) => {
     try {
-        const roomId = req.user.room; 
-        const chatList = await Message.findByPk(roomId);
+        const {roomId} = req.query;
+        const chatList = await Message.findAll({where:{room:roomId}});
 
         if (!chatList) {
             return res.status(404).json({ message: "No chats found for this room" });

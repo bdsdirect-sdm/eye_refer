@@ -14,9 +14,11 @@ export const sendMessage = (socket: any) => {
         const room = data.room;
         const author = data.author;
         const message = data.message;
-        const time = message.time;
+        const time = data.time;
+        const sender = data.sender;
+        const receiver = data.receiver;
         // io.to(room).emit("message", data);
-        const messages = await Message.create( {room, author, message, time });
+        const messages = await Message.create( {room, author, message, time,sender,receiver });
         if(messages) {}
 
         socket.emit("message", data)  //data sent to frontend

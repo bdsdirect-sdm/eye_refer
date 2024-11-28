@@ -21,7 +21,7 @@ const Header: React.FC = () => {
 
     return (
         <>
-            <header className="p-4 bg-white shadow">
+            <div className=" p-[12px] bg-white shadow">
                 <div className="container mx-auto flex justify-between items-center">
                     <Link to="#" className="flex items-center text-gray-800">
                         <img src={logo} alt="EyeRefer" className="h-15" />
@@ -40,8 +40,8 @@ const Header: React.FC = () => {
                                         {/* <img src={user} alt='profile photo'/> */}
                                         <div className='flex justify-evenly'>
                                             <div>
-                                            <span className='text-l'>Hi, {name}!</span>
-                                            <p className='text-gray-500 font-light'>Welcome back</p>
+                                            <span className='text-base'>Hi, {name}!</span>
+                                            <p className='text-gray-500 text-sm font-light'>Welcome back</p>
                                             </div>
                                         <img src={dropDown} className='h-8 p-2'/>
                                         </div>
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
                         )}
                     </div>
                 </div>
-            </header>
+            </div>
         </>
     );
 }

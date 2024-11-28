@@ -120,7 +120,8 @@ const PatientListOD: React.FC = () => {
                 localStorage.setItem("room", roomId);
                 console.log("ROOOOOOOOOOOOOOOm")
                 joinRoom(roomId);
-                navigate(`/chat/${patient.referedby.uuid}${patient.referedto.uuid}${patient.uuid}`);
+                // navigate(`/chat/${patient.referedby.uuid}${patient.referedto.uuid}${patient.uuid}`);
+                navigate("/chat",{state:{rooj}})
               }}>
                 Link
               </a>

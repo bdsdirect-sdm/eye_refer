@@ -17,43 +17,67 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white w-1/5 p-4 border-r-2"> 
-            <div className='p-8 flex-row justify-around'>
+        <nav className="bg-white p-6 border-r-2"> 
+            <div className=' flex-row justify-around text-base'>
             <ul className="flex flex-col space-y-2 text-left"> 
                 {token && (
                     <>
-                        <li className='flex justify-start hover:bg-teal-100  hover:text-teal-400 p-4 cursor-pointer'>
-                            <GoHome className='text-2xl'/>
-                            <Link to="/dashboard" className="nav-link rounded px-2 text-[#232A2E]">Dashboard</Link>
+                        <li className='flex justify-start hover:bg-teal-100    cursor-pointer '>
+                            <Link to="/dashboard" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                <GoHome className='text-2xl'/>
+                                <span className="nav-link rounded px-2 ">Dashboard</span>
+                            </Link>
+                            
                         </li>
                         {doctype == 2 ? (
-                            <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                                <LiaUserInjuredSolid className='text-2xl'/>
-                                <Link to="/patient-od" className="nav-link rounded px-2 text-[#232A2E] border-l-4">Patients</Link>
+                            <li className='flex justify-start hover:bg-teal-100  cursor-pointer '>
+                                <Link to="/patient-od" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                    <LiaUserInjuredSolid className='text-xl'/>
+                                    <span className="nav-link rounded px-2 ">Patients</span>
+                                </Link>
+                                
                             </li>
+                            // <li className='flex justify-start hover:bg-teal-100 px-4 py-3 rounded hover:text-teal-400 hover:border-l-teal-700 cursor-pointer'>
+                            //     <LiaUserInjuredSolid className='text-2xl'/>
+                            //     <Link to="/patient-od" className="nav-link rounded  text-[#232A2E] border-l-4">Patients</Link>
+                            // </li>
                         ) : 
                         (
-                            <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                                <LiaUserInjuredSolid className='text-2xl' />
-                                <Link to="/patient-md" className="nav-link rounded px-2  text-[#232A2E] border-l-4">Patients</Link>
-                            </li>
+                            <li className='flex justify-start hover:bg-teal-100    cursor-pointer '>
+                            <Link to="/patient-md" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                <LiaUserInjuredSolid className='text-2xl'/>
+                                <span className="nav-link rounded px-2 ">Patients</span>
+                            </Link>
+                            
+                        </li>
                         )
                         }
                         
                         {doctype == 1 && (
-                            <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                                <MdOutlineDateRange className='text-2xl' />
-                                <Link to="/view-appointments" className="nav-link rounded px-2 text-[#232A2E] border-l-4">Appointments</Link>
+                            <li className='flex justify-start hover:bg-teal-100  cursor-pointer '>
+                                <Link to="/view-appointments" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                    <MdOutlineDateRange className='text-xl'/>
+                                    <span className="nav-link rounded px-2 ">Appointments</span>
+                                </Link>
+                                
                             </li>
                         )}
-                        <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                            <PiStethoscope className='text-2xl' />
-                            <Link to="/doctor" className="nav-link rounded px-2 text-[#232A2E] border-l-4">Doctors</Link>
-                        </li>
-                        <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                            <CiChat1 className='text-2xl' />
-                            <Link to="/chat" className="nav-link rounded px-2 text-[#232A2E] border-l-4">Chat</Link>
-                        </li>
+
+                            <li className='flex justify-start hover:bg-teal-100  cursor-pointer '>
+                                <Link to="/doctor" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                    <PiStethoscope className='text-xl'/>
+                                    <span className="nav-link rounded px-2 ">Doctors</span>
+                                </Link>
+                                
+                            </li>
+
+                            <li className='flex justify-start hover:bg-teal-100  cursor-pointer '>
+                                <Link to="/chat" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                    <CiChat1 className='text-xl'/>
+                                    <span className="nav-link rounded px-2 ">Chat</span>
+                                </Link>
+                                
+                            </li>
                         {/* <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
                             <img src={staff}/>
                             <Link to="/staff" className="nav-link rounded px-2 hover:text-teal-400 text-[#232A2E] border-l-4">Staff</Link>

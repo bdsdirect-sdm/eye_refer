@@ -29,6 +29,7 @@ const Login: React.FC = () => {
           localStorage.setItem("doctype", doctype);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("name", response.data.user.firstname + " " + response.data.user.lastname);
+          localStorage.setItem("doctor",JSON.stringify(response.data.user));
           
           toast.success("Login Successfully");
           navigate("/dashboard");
