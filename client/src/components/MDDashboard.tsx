@@ -53,17 +53,17 @@ const MDDashboard: React.FC = () => {
 
     return (
         <>
-                <div className="flex-grow p-4 bg-gray-300">
-                    <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+                <div className="flex-grow p-4 bg-gray-200 w-full">
+                    <h1 className="text-xl font-medium mb-1">Dashboard</h1>
                     <ReferralComponents 
                         // referralCount={data.referralCount}
                         // referralCompleteCount={data.referralCompleteCount}
                         // doctorCount={data.doctorCount}
                         // time={data.lastUpdate} 
                     />
-                    <div>
-                    <h1 className="text-2xl font-bold mb-4">Referral Patients</h1>
-                    <Button onClick={() => {navigate("/add-appointment")}}>Add Appointment +</Button> 
+                    <div className='flex justify-between align-items-center'>
+                        <h1 className="text-2xl font-bold">Referral Patients</h1>
+                        <Button onClick={() => {navigate("/add-appointment")}}>Add Appointment +</Button> 
                     </div>
                     
                     <PatientListMD />

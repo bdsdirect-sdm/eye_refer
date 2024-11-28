@@ -7,7 +7,7 @@ const ChatBody = ({ messageList }) => {
             <small>{msg.time}</small>
           </div>
         ))} */}
-        kljjj
+        No data
       </div>
     );
   };

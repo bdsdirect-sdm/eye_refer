@@ -59,7 +59,7 @@ const Searchbar = ({ refetch, query, setQuery }) => {
     <div className="flex mt-4 gap-x-2">
       <input
         type="text"
-        className="border-gray-400 py-3 px-3 w-1/4 rounded focus:ring-teal-600"
+        className="border-gray-400 p-2 w-1/4 rounded focus:ring-gray-950 "
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
