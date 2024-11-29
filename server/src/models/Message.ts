@@ -22,9 +22,19 @@ const Message = sequelize.define("message", {
         allowNull: true
     },
     time: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: true
     },
+    sender:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    receiver:{
+        type: DataTypes.STRING,
+        allowNull:false
+    }
+},{
+    timestamps: true,
 })
 
 export default Message;
