@@ -44,7 +44,7 @@ const ChatBar = () => {
 
       function joinRoom(roomId: string) {
         if(roomId !== "") {
-          socket.emit("joinRoom", {room: roomId});
+          socket.emit("join_room", {room: roomId});
         }
       }
 
@@ -55,18 +55,18 @@ const ChatBar = () => {
   //     // console.log("Room-List------------>", Patients);
   return (
     <>
-      <div className="flex flex-col p-4 border-r-2 border-gray-300 w-1/4">
+      <div className="flex flex-col py-3  px-2 border-r-2 border-gray-300 w-1/4">
         <p className="text-lg font-semibold">Messages</p>
         <input type='text' placeholder='Search'  className='p-2 border-2 border-gray-300 w-full rounded-sm' />
         {patients?.map((patient: any, index: number) => (
-            <div className='bg-teal-700 px-4 py-2 m-2 hover:bg-teal-600 cursor-pointer rounded' onClick={() => {
+            <div className='bg-[#e8edec] px-4 py-2 w-full my-2 hover:bg-[#c0fae7] cursor-pointer rounded' onClick={() => {
               const roomId = patient.referedby + patient.referedto + patient.uuid;
               localStorage.setItem("room", roomId);
               joinRoom(roomId);
               navigate(`/chat/${roomId}`,{state:{patientName:`${patient?.firstname} ${patient?.lastname}`,
               user:patient},});
             }}>
-                <p className="text-base text-white">{patient?.firstname} {patient?.lastname}</p>
+                <p className="text-base   ">{patient?.firstname} {patient?.lastname}</p>
             </div>
             
           ))}

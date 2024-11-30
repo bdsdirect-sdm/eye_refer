@@ -205,6 +205,7 @@ const EditPatient: React.FC = () => {
               <Field
                 type="text"
                 name="firstname"
+                value={Patient?.patientData?.firstname}
                 placeholder="Enter First Name"
                 className="w-full border border-gray-300 rounded-md p-2"
               />

@@ -11,11 +11,11 @@ const ChatBody = ({ messageList,doctorId }:any) => {
                 }`}
               >
                 <div
-                  className={`p-2 rounded-md ${
-                    msg.sender === doctorId ? "bg-teal-500 text-white text-end" : "bg-gray-300 text-start"
+                  className={`px-3 py-2  ${
+                    msg.sender === doctorId ? "bg-[#bbeada] rounded-l-2xl text-end" : "bg-gray-300 rounded-r-2xl text-start"
                   }`}
                 >
-                  <p><span className=" font-semibold">{msg?.author}</span>: {msg?.message}</p>
+                  <p><span className=" font-semibold">{msg.sender === doctorId ? "You" : msg?.author  }</span>: {msg?.message}</p>
                   <span className="text-xs text-gray-500">
                     {msg.time || "Unknown time"}
                   </span>

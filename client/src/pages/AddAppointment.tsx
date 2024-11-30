@@ -6,10 +6,11 @@ import { toast } from 'react-toastify';
 import api from '../api/axiosInstance';
 import * as Yup from 'yup';
 import React, { useEffect } from 'react';
+import Button from "../components/Button"
 
 
 const AddAppointment:React.FC = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();   
   const token = localStorage.getItem('token');
 
   useEffect(()=>{

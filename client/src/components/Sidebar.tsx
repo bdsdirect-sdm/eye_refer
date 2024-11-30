@@ -44,12 +44,11 @@ const Navbar = () => {
                         ) : 
                         (
                             <li className='flex justify-start hover:bg-teal-100    cursor-pointer '>
-                            <Link to="/patient-md" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
-                                <LiaUserInjuredSolid className='text-2xl'/>
-                                <span className="nav-link rounded px-2 ">Patients</span>
-                            </Link>
-                            
-                        </li>
+                                <Link to="/patient-md" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                    <LiaUserInjuredSolid className='text-2xl'/>
+                                    <span className="nav-link rounded px-2 ">Patients</span>
+                                </Link>
+                            </li>
                         )
                         }
                         
@@ -83,9 +82,12 @@ const Navbar = () => {
                             <Link to="/staff" className="nav-link rounded px-2 hover:text-teal-400 text-[#232A2E] border-l-4">Staff</Link>
                         </li> */}
                         {doctype == 2 && (
-                            <li className='flex justify-start hover:bg-teal-100 p-4 rounded hover:text-teal-400 cursor-pointer'>
-                                <Link to="/add-patient" className="nav-link rounded px-2 text-[#232A2E] border-l-4">Add Referral Patient</Link>
-                            </li>
+                            <li className='flex justify-start hover:bg-teal-100  cursor-pointer '>
+                            <Link to="/add-patient" className='flex flex-row px-4 py-3  hover:text-teal-400 hover:border-l-2 '>
+                                <span className="nav-link rounded px-2 ">Add patient</span>
+                            </Link>
+                            
+                        </li>
                         )}
                     </>
                 )}

@@ -99,7 +99,7 @@ const ViewAppointments: React.FC = () => {
         
         <td>
         <button className='text-green-700' onClick={() => {
-            updateStatus("Completed", appointment.patient.uuid, appointment.id)
+            updateStatus("Completed", appointment.uuid, appointment.id)
           }}> Complete </button>
         </td>
         <td>
@@ -107,8 +107,8 @@ const ViewAppointments: React.FC = () => {
         </td>
         <td className="border px-4 py-2">
                 <div className='flex flex-row'>
-                <button className="btn btn-primary mr-2" onClick={() => { navigate(`/edit-appointment/${appointment.id}`); }}><MdOutlineEdit /></button>
-                <button className="btn btn-secondary" onClick={() => { navigate(`/view-appointment/${appointment.id}`); }}><MdOutlineRemoveRedEye /></button>
+                <button className="btn btn-primary mr-2" onClick={() => { navigate(`/edit-appointment/${appointment.uuid}`); }}><MdOutlineEdit /></button>
+                <button className="btn btn-secondary" onClick={() => { navigate(`/view-appointment/${appointment.uuid}`); }}><MdOutlineRemoveRedEye /></button>
                 </div>
               </td>
       </tr>

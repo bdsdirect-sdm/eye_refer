@@ -94,8 +94,7 @@ const PatientListMD: React.FC = () => {
           {Patients.patientList.map((patient: any, index: number) => (
             <tr key={patient.uuid} className="hover:bg-gray-100">
               <td className='fw-bold border px-4 py-2'>{index + 1}</td>
-              <td className="border px-4 py-2">{patient.firstname} {patient.lastname}</td>
-              <td className="border px-4 py-2">{moment(new Date(patient.dob)).format('MMM-D-YYYY')}</td>
+              <td className="border px-4 py-2">{patient?.firstname} {patient?.lastname}</td>
               <td className="border px-4 py-2">{moment(new Date(patient.referedon)).format('MMM-D-YYYY')}</td>
               <td className="border px-4 py-2">{patient.referedby.firstname} {patient.referedby.lastname}</td>
               {patient.appointmentType === "consultation" ? (
@@ -106,7 +105,7 @@ const PatientListMD: React.FC = () => {
               ) : (
                 <>
                   <td className="border px-4 py-2"></td>
-                  <td className="border px-4 py-2">{moment(new Date(patient.appointmentDate)).format('MMM-D-YYYY')}</td>
+                  <td className="border px-4 py-2">{moment(new Date(patient?.appointmentDate)).format('MMM-D-YYYY')}</td>
                 </>
               )}
               <td className="border px-4 py-2">{patient.referalstatus ? "Completed" : "Pending"}</td>

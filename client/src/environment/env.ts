@@ -40,4 +40,5 @@ export const Local:config = {
     GET_CHATDATA: import.meta.env.VITE_GET_CHATDATA,
     VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT,
     EDIT_APPOINTMENT: import.meta.env.VITE_EDIT_APPOINTMENT
+    
 }

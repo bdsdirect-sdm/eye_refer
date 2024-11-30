@@ -1,14 +1,13 @@
 import Message from '../models/Message';
 
-export const joinRoom = (socket: any) => {
-    socket.on("joinRoom", (data: string) => {
+export const joinRoom = (socket: any) => (
+    socket.on("join_room", (data: string) => {
         socket.join(data);
         console.log(`User ${socket.id} has joined room`, data);
-        socket.to(data).emit("message",{message:`New User Just joined the room ${data}`, socketId:socket.id});
     })
-}
+)
 
-export const sendMessage = (socket: any) => {
+export const sendMessage = (socket: any,io:any) => (
     socket.on("sendMessage", async (data: any) => {
         console.log("Message received", data);
         const room = data.room;
@@ -21,7 +20,8 @@ export const sendMessage = (socket: any) => {
         const messages = await Message.create( {room, author, message, time,sender,receiver });
         if(messages) {}
 
-        socket.emit("message", data)  //data sent to frontend
+        socket.to(room).emit("message",data)  //data sent to frontend
+
     })
-}
+)
 

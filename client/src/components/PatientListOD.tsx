@@ -43,6 +43,10 @@ const PatientListOD: React.FC = () => {
     queryFn: fetchPatient
   })
 
+  const  deletePatient = async(id: number) => {
+    console.log("patient si deleted")
+  }
+
   if(isLoading){
     return(
       <>
@@ -116,12 +120,12 @@ const PatientListOD: React.FC = () => {
             <td className="border px-4 py-2"><a className='text-blue-500 underline'>Note</a></td>
             <td className="border px-4 py-2">
               <a className="underline text-blue-600 hover:cursor-pointer" onClick={() => {
+                // const roomId = patient.referedby.uuid + patient.referedto.uuid + patient.uuid;
+                // localStorage.setItem("room", roomId);
                 const roomId = patient.referedby.uuid + patient.referedto.uuid + patient.uuid;
                 localStorage.setItem("room", roomId);
-                console.log("ROOOOOOOOOOOOOOOm")
                 joinRoom(roomId);
-                // navigate(`/chat/${patient.referedby.uuid}${patient.referedto.uuid}${patient.uuid}`);
-                navigate("/chat",{state:{rooj}})
+                navigate(`/chat/${roomId}`);
               }}>
                 Link
               </a>
@@ -129,7 +133,7 @@ const PatientListOD: React.FC = () => {
             <td className="border px-4 py-2">
                 <div className='flex flex-row'>
                 <button className="btn btn-primary mr-2" onClick={() => { navigate(`/edit-patient/${patient.uuid}`); }}><MdOutlineEdit /></button>
-                <button className="btn btn-danger mr-2"><AiOutlineDelete /></button>
+                <button className="btn btn-danger mr-2" onClick={deletePatient}><AiOutlineDelete /></button>
                 <button className="btn btn-secondary" onClick={() => { navigate(`/view-patient/${patient.uuid}`); }}><MdOutlineRemoveRedEye /></button>
                 </div>
               </td>

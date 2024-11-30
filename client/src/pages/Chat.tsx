@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ChatBar from "../components/ChatBar";
 import ChatBody from "../components/ChatBody";
 import socket from "../utils/socket";
 import { Local } from "../environment/env";
 import api from "../api/axiosInstance";
+// const roomId = localStorage.getItem("room");
+// const doctor = JSON.parse(localStorage.getItem("doctor"));
 
 const Chat = () => {
+  const roomId = localStorage.getItem("room");
+const doctor = JSON.parse(localStorage.getItem("doctor"));
   const navigate = useNavigate();
   const location = useLocation();
 
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState<Array<any>>([]);
-  const roomId = localStorage.getItem("room");
+  
   const { patientName, user } = location.state || {};
-  const doctor = JSON.parse(localStorage.getItem("doctor"));
+  console.log("useruseruser",user);
+  
   const name = localStorage.getItem("name");
   const token = localStorage.getItem("token");
 
@@ -42,7 +47,8 @@ const Chat = () => {
   // Fetch messages only once when the component mounts
   useEffect(() => {
     fetchMessage();
-  }, []); // No dependencies to avoid infinite API calls
+    socket.emit("join_room",roomId)
+  }, [roomId]); // No dependencies to avoid infinite API calls
 
   // Send a message
   const sendMessage = async () => {
@@ -52,8 +58,8 @@ const Chat = () => {
       room: roomId,
       author: name,
       message: message,
-      sender: doctor?.uuid,
-      receiver: user.referedto === doctor.uuid ? user.referedby : doctor.uuid,
+      sender: doctor.uuid,
+      receiver: user?.referedto == doctor?.uuid ? user.referedby : doctor.uuid,
       time: new Date().toLocaleTimeString(),
     };
 
@@ -61,18 +67,15 @@ const Chat = () => {
       // Emit the message for real-time chat
       socket.emit("sendMessage", messageData);
 
+      console.log("messageDatamessageData",messageData)
+
       // Add the message to the local state immediately
       setMessageList((prevMessageList) => [
         ...prevMessageList,
-        { ...messageData, isUserMessage: true },
+        messageData,
       ]);
 
       // Optionally save the message in the database (avoid infinite calls here too)
-      await api.post(`${Local.SAVE_CHATDATA}`, messageData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -85,14 +88,15 @@ const Chat = () => {
     const messageListener = (data: any) => {
       setMessageList((prevMessageList) => [
         ...prevMessageList,
-        { ...data, isUserMessage: false },
+         data ,
       ]);
     };
 
-    socket.on("send_message", messageListener);
+    socket.on("message", messageListener);
 
     return () => {
-      socket.off("send_message", messageListener); // Cleanup listener to prevent duplicates
+      socket.off("message", messageListener); // Cleanup listener to prevent duplicates
+      localStorage.setItem("room","")
     };
   }, []); // Empty dependency to ensure it runs only once
 
@@ -100,8 +104,8 @@ const Chat = () => {
     <div className="flex">
       <ChatBar />
       <div className="flex flex-col w-full h-screen">
-        <div className="bg-teal-700 p-4 rounded-t-md">
-          <h2 className="text-white text-xl">
+        <div className="bg-[#e8edec] p-4 rounded-t-md">
+          <h2 className=" text-lg font-semibold">
             {patientName ? patientName : "Patient Name"}
           </h2>
         </div>
@@ -125,7 +129,7 @@ const Chat = () => {
             <button
               onClick={sendMessage}
               type="button"
-              className="bg-teal-900 text-white px-4 py-2 rounded-r-md hover:bg-teal-700"
+              className="bg-[#e8edec] px-4 py-2 rounded-r-md hover:bg-[#c0fae7]"
             >
               Send
             </button>

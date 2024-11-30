@@ -11,7 +11,7 @@ function setSocket(server:any) {
     io.on("connection", (socket) => {
         console.log("Connection established!", socket.id);
         joinRoom(socket);
-        sendMessage(socket);
+        sendMessage(socket,io);
 
         // socket.on("sendMessage", (messageData))
     })

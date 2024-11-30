@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import api from '../api/axiosInstance';
 import * as Yup from 'yup';
-
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required('First Name is required'),
@@ -17,18 +16,14 @@ const validationSchema = Yup.object().shape({
     .required("Phone is required")
     .matches(/^\d{10}$/, "Phone number must be exactly 10 digits"),
 });
-
 const EditAppointment: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const { id } = useParams();
-
   const [appointmentData, setAppointmentData] = useState<any>(null);
-
   useEffect(() => {
     if (!token) navigate('/login');
   }, [navigate, token]);
-
   // Fetch the appointment details
   const fetchAppointment = async () => {
     try {
@@ -40,12 +35,10 @@ const EditAppointment: React.FC = () => {
       toast.error('Error fetching appointment data');
     }
   };
-
   const { data: appointment, error, isLoading, isError } = useQuery({
     queryKey: ['appointment', id],
     queryFn: fetchAppointment,
   });
-
   const updateAppointment = async (data: any) => {
     try {
       const response = await api.put(`${Local.EDIT_APPOINTMENT}/${id}`, data, {
@@ -57,13 +50,10 @@ const EditAppointment: React.FC = () => {
       toast.error('Error updating appointment');
     }
   };
-
   const mutation = useMutation(updateAppointment);
-
   const handleSubmit = (values: any) => {
     mutation.mutate(values);
   };
-
   if (isLoading) {
     return (
       <div>
@@ -74,11 +64,9 @@ const EditAppointment: React.FC = () => {
       </div>
     );
   }
-
   if (isError) {
     return <div>Error: {error?.message || 'Error loading data'}</div>;
   }
-
   return (
     <div>
       <Formik
@@ -105,7 +93,6 @@ const EditAppointment: React.FC = () => {
               />
               <ErrorMessage name="firstname" component="div" className="text-red-500 mt-1" />
             </div>
-
             <div className="form-group">
               <label className="block mb-1">Last Name:</label>
               <Field
@@ -115,7 +102,6 @@ const EditAppointment: React.FC = () => {
               />
               <ErrorMessage name="lastname" component="div" className="text-red-500 mt-1" />
             </div>
-
             <div className="form-group">
               <label className="block mb-1">Disease:</label>
               <Field
@@ -126,7 +112,6 @@ const EditAppointment: React.FC = () => {
               <ErrorMessage name="disease" component="div" className="text-red-500 mt-1" />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="form-group">
               <label className="block mb-1">Phone:</label>
@@ -137,9 +122,7 @@ const EditAppointment: React.FC = () => {
               />
               <ErrorMessage name="phone" component="div" className="text-red-500 mt-1" />
             </div>
-
           </div>
-
           <div className="flex justify-between">
             <button
               type="submit"
@@ -160,5 +143,4 @@ const EditAppointment: React.FC = () => {
     </div>
   );
 };
-
 export default EditAppointment;
